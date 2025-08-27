@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <img src="https://i.postimg.cc/c4WfmYg7/Submittable-logo-small-transparent.png" alt="My Website Logo" class="logo">
+  <title>Applicant Chatbot</title>
+  <style>
+
+    body {
+      font-family: Verdana, Geneva, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+
+    .logo {
+            width: 180px; /* Adjust the size */
+            height: auto;
+    }
+    #widget-container {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 2px dashed #1B365D;
+      background: #fff;
+    }
+    #prompt-library {
+      margin-top: 2rem;
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    ul {
+      margin-top: 0;
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Optional: prevent widget from interfering with copying */
+    * {
+      user-select: auto !important;
+    }
+    h3 {
+      color: #1B365D;
+      margin-bottom: 0.5rem;
+    }
+    h4 {
+      color: #1B365D;
+      margin-bottom: 0.5rem;
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <h1 style="color: #1B365D;">Beamer In-App Messaging POC</h1>
+  <!-- <p>This is a basic HTML page for testing the applicant chatbot widget.</p> -->
+
+  <!-- ✅ Widget Container
+  <div id="widget-container">
+    <p>Click on the chat bubble icon at the bottom right corner to launch the chatbot</p>
+  </div>
+-->
+
+ <div id="prompt-library">
+<h2 style="color: #1B365D;">💬 Sample Applicant Prompts</h2>
+<p>Try any of these prompts in the Chatbot widget!</p>
+   
+<h3 style="color: #1B365D;">Application Process Questions:</h3>
+
+<h3>Getting Started</h3>
+<ul>
+<li>How do I create an account and start my application?</li>
+<li>Where do I find the application form?</li>
+<li>Do I need an invitation code to apply?</li>
+<li>What’s the difference between my profile and the application?</li>
+</ul>
+</div>
+ 
+
+<!-- Begin Embed Chatbot Widget -->
+  <script
+      data-embed-id="398b2ade-25f4-4396-be5b-c3d8451a56aa"
+      data-base-api-url="https://anythingllm-docker-production-e607.up.railway.app/api/embed"
+      data-brand-image-url="https://i.postimg.cc/RqrQtvqM/Sumbittable-circular-badge.png"
+     
+      data-chat-icon="#FC5B30"
+      data-assistant-icon="https://i.postimg.cc/zXkKPBKs/Submittable-badge-no-heart.png"
+      data-button-color="#FC5B30"
+      data-user-bg-color="#FC5B30"
+      data-open-on-load="on"
+      
+      data-assistant-name="Submittable Application Assistant"
+      data-greeting="Hello and welcome to the Submittable Application Assistant!
+      I'm here to guide you through the application process — from eligibility questions to document submission and deadlines."
+      data-send-message-text="Got a question? I’m here to help!"
+      
+      data-no-sponsor=" "
+      data-username=" "   
+ 
+      src="https://anythingllm-docker-production-e607.up.railway.app/embed/anythingllm-chat-widget.min.js">
+    </script>
+<!-- End Embed Chatbot Widget -->
+
+</body>
+</html>

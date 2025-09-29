@@ -3,93 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <img src="https://i.postimg.cc/c4WfmYg7/Submittable-logo-small-transparent.png" alt="My Website Logo" class="logo">
-  <title>Applicant Chatbot</title>
-  <style>
-
-    body {
-      font-family: Verdana, Geneva, sans-serif;
-      padding: 2rem;
-      background: #f5f5f5;
-    }
-
-    .logo {
-            width: 180px; /* Adjust the size */
-            height: auto;
-    }
-    #widget-container {
-      margin-top: 2rem;
-      padding: 1rem;
-      border: 2px dashed #1B365D;
-      background: #fff;
-    }
-    #prompt-library {
-      margin-top: 2rem;
-      background: #fafafa;
-      padding: 1rem;
-      border-radius: 8px;
-    }
-    ul {
-      margin-top: 0;
-      padding-left: 1.5rem;
-    }
-    li {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Optional: prevent widget from interfering with copying */
-    * {
-      user-select: auto !important;
-    }
-    h3 {
-      color: #1B365D;
-      margin-bottom: 0.5rem;
-    }
-    h4 {
-      color: #1B365D;
-      margin-bottom: 0.5rem;
-    }
-    
-  </style>
+  <title>Beamer Auto-Open Example</title>
 </head>
-
 <body>
 
-  <h2 style="color: #1B365D;">Beamer In-App Banners POC</h2>
-  <!-- <p>This is a basic HTML page for testing the applicant chatbot widget.</p> -->
+  <!-- Trigger Button (optional) -->
+  <button class="beamerTrigger">Check for Updates</button>
 
-  <!-- ✅ Widget Container
-  <div id="widget-container">
-    <p>Click on the chat bubble icon at the bottom right corner to launch the chatbot</p>
-  </div>
--->
+  <!-- Beamer Embed Configuration -->
+  <script>
+    var beamer_config = {
+      product_id: 'sgmCuSQC78643'  // ← Replace with your real Beamer product ID
+    };
+  </script>
+  <script src="https://app.getbeamer.com/js/beamer-embed.js"></script>
 
- <div id="prompt-library">
-<h2 style="color: #1B365D;">💬 Sample Applicant Prompts</h2>
-<p>Try any of these prompts in the Chatbot widget!</p>
-   
-<h3 style="color: #1B365D;">Application Process Questions:</h3>
-
-<h3>Getting Started</h3>
-<ul>
-<li>How do I create an account and start my application?</li>
-<li>Where do I find the application form?</li>
-<li>Do I need an invitation code to apply?</li>
-<li>What’s the difference between my profile and the application?</li>
-</ul>
-</div>
- 
-
-<!-- Begin Embed Beamer -->
-<script>
-  var beamer_config = {
-    product_id : "sgmCuSQC78643", // DO NOT CHANGE: This is your product code on Beamer
-    user_id : "00001234" // A unique ID to identify the user
-  };
-</script>
-<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
-<!-- End Embed Beamer -->
+  <!-- Auto-Open Logic -->
+  <script>
+    // Wait until the page fully loads
+    window.addEventListener('load', function () {
+      // Optional: delay in milliseconds (e.g. 2000 = 2 seconds)
+      setTimeout(function () {
+        // Check if Beamer is loaded, then open
+        if (typeof Beamer !== 'undefined') {
+          Beamer.show();  // 👈 Automatically opens the widget
+        } else {
+          console.warn('Beamer not loaded.');
+        }
+      }, 2000); // Change delay as needed
+    });
+  </script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
 <body>
 
   <!-- Trigger Button (optional) -->
-  <div class="beamerTrigger">What's new</div>
+  <button class="beamerTrigger">Check for Updates</button>
 
   <!-- Beamer Embed Configuration -->
   <script>
@@ -16,17 +16,23 @@
       product_id: 'sgmCuSQC78643'  // ← Replace with your real Beamer product ID
     };
   </script>
-  <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js"></script>
+  <script src="https://app.getbeamer.com/js/beamer-embed.js"></script>
 
-  <!-- Auto-Open with onLoadCallback -->
-<script>
-  window.addEventListener('load', function () {
-    window.Beamer = window.Beamer || {};
-    window.Beamer.onLoadCallback = function() {
-      Beamer.show();  // Automatically open when fully loaded
-    };
-  });
-</script>
+  <!-- Auto-Open Logic -->
+  <script>
+    // Wait until the page fully loads
+    window.addEventListener('load', function () {
+      // Optional: delay in milliseconds (e.g. 2000 = 2 seconds)
+      setTimeout(function () {
+        // Check if Beamer is loaded, then open
+        if (typeof Beamer !== 'undefined') {
+          Beamer.show();  // 👈 Automatically opens the widget
+        } else {
+          console.warn('Beamer not loaded.');
+        }
+      }, 2000); // Change delay as needed
+    });
+  </script>
 
 </body>
 </html>

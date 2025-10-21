@@ -3,12 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beamer Auto-Open Example</title>
+  <title>Beamer In-app Messaging POC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #c7d2fe);
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- Navbar --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 16px 40px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 200px;
+      height: auto;
+    }
+
+    .logo span {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #312e81;
+    }
+
+    /* --- Main Section --- */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      color: #1e1b4b;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+
+    .beamerTrigger {
+      background-color: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .beamerTrigger:hover {
+      background-color: #4338ca;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      background: rgba(255, 255, 255, 0.8);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* --- Animation --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main, header, footer {
+      animation: fadeIn 0.8s ease;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Trigger Button (optional) -->
-  <button class="beamerTrigger">Check for Updates</button>
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/tYDzGQRx/Submittable-S-Transparent.png" alt="Logo" />
+      <span>Beamer In-app Messaging POC</span>
+    </div>
+    <nav>
+      <!-- Optional nav links -->
+      <a href="#" style="margin-right:20px; text-decoration:none; color:#4f46e5; font-weight:600;">Docs</a>
+      <a href="#" style="text-decoration:none; color:#4f46e5; font-weight:600;">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>In-app Banners</h1>
+    <p>This demo automatically displays banners for new posts published.</p>
+
+    <h1>See What’s New Instantly</h1>
+    <p>This demo automatically opens your Beamer in-app widget and lets users check for updates at any time. Try it below or wait a moment for Beamer to open automatically.</p>
+    <button class="beamerTrigger">Check for Updates</button>
+  </main>
+
+  <footer>
+    © 2025 Submittble • Built for testing in-app updates and banners
+  </footer>
 
   <!-- Beamer Embed Configuration -->
   <script>
@@ -20,17 +160,14 @@
 
   <!-- Auto-Open Logic -->
   <script>
-    // Wait until the page fully loads
     window.addEventListener('load', function () {
-      // Optional: delay in milliseconds (e.g. 2000 = 2 seconds)
       setTimeout(function () {
-        // Check if Beamer is loaded, then open
         if (typeof Beamer !== 'undefined') {
-          Beamer.show();  // 👈 Automatically opens the widget
+          Beamer.show();
         } else {
           console.warn('Beamer not loaded.');
         }
-      }, 2000); // Change delay as needed
+      }, 2000);
     });
   </script>
 

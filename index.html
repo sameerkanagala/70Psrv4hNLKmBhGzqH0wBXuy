@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Create Beamer Posts</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beamer In-app Messaging POC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -10,313 +12,173 @@
 
     body {
       margin: 0;
-      font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(120deg, #e3f2fd, #f8f9fa);
-      color: #333;
-      height: 100vh;
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #c7d2fe);
+      color: #1f2937;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* --- Navbar --- */
     header {
-      text-align: center;
-      padding: 25px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 16px 40px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    header img {
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
       width: 200px;
       height: auto;
-      margin-bottom: 10px;
     }
 
-    header h1 {
-      margin: 0;
-      color: #222;
-      font-weight: 600;
+    .logo span {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #312e81;
     }
 
+    /* --- Main Section --- */
     main {
-      display: flex;
       flex: 1;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: stretch;
-      padding: 20px;
-      gap: 30px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      padding: 25px;
-      flex: 1;
-      display: flex;
       flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.2s ease;
+      text-align: center;
+      padding: 60px 20px;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-    }
-
-    .form-card {
-      max-width: 500px;
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #1e1b4b;
     }
 
     h2 {
       margin-top: 0;
-      font-size: 1.3rem;
-      color: #172266;
-      margin-bottom: 20px;
     }
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 500;
+    p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #4b5563;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-      font-size: 14px;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
+    .beamerTrigger {
       background-color: #FC5B30;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #e67556;
-    }
-
-    #result {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: 500;
-      color: #28a745;
-    }
-
-    /* Post Log */
-    .post-log {
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    .post-item {
-      border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 10px;
-      transition: all 0.3s ease;
-      background-color: #fafbfc;
-      cursor: pointer;
-    }
-
-    .post-item:hover {
-      background-color: #f0f7ff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .post-item h4 {
-      margin: 0;
-      color: #007bff;
-      font-size: 1.05rem;
-    }
-
-    .post-meta {
-      font-size: 13px;
-      color: #666;
-      margin: 4px 0 8px;
-    }
-
-    .post-content {
-      display: none;
-      font-size: 14px;
-      color: #333;
-      border-top: 1px solid #eee;
-      margin-top: 8px;
-      padding-top: 8px;
-    }
-
-    .post-item.active .post-content {
-      display: block;
-    }
-
-    /* Floating reload button */
-    .refresh-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #007bff;
       color: #fff;
       border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 22px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
 
-    .refresh-btn:hover {
-      background-color: #0056b3;
+    .beamerTrigger:hover {
+      background-color: #f4886b;
+      box-shadow: 0 4px 15px #f4886b;
+      transform: translateY(-2px);
     }
 
-    /* Toast message */
-    #toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #28a745;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      display: none;
-      font-weight: 500;
-      animation: fadeinout 3s forwards;
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      background: rgba(255, 255, 255, 0.8);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    @keyframes fadeinout {
-      0% {opacity: 0;}
-      10% {opacity: 1;}
-      90% {opacity: 1;}
-      100% {opacity: 0;}
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* --- Animation --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main, header, footer {
+      animation: fadeIn 0.8s ease;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="https://i.postimg.cc/tYDzGQRx/Submittable-S-Transparent.png" alt="Logo">
-    <h1>Beamer Post Creator</h1>
+    <div class="logo">
+      <img src="https://i.postimg.cc/tYDzGQRx/Submittable-S-Transparent.png" alt="Logo" />
+      <span>Beamer In-app messaging POC</span>
+    </div>
+
+   <!-- Optional nav links -->
+   <!--
+    <nav>
+      <a href="#" style="margin-right:20px; text-decoration:none; color:#4f46e5; font-weight:600;">Docs</a>
+      <a href="#" style="text-decoration:none; color:#4f46e5; font-weight:600;">Support</a>
+    </nav>
+   -->
+
   </header>
 
   <main>
-    <div class="card form-card">
-      <h2>Create New Post</h2>
-      <form id="postForm">
-        <label for="title">Title:</label>
-        <input type="text" id="title" required>
+    <h1>In-app Banners</h1>
+    <p>This demo automatically displays banners for new posts published.</p>
 
-        <label for="content">Content (HTML allowed):</label>
-        <textarea id="content" rows="4" required></textarea>
-
-        <label for="category">Category:</label>
-        <select id="category" required>
-          <option value="" disabled selected>Select a category</option>
-          <option value="new">New</option>
-          <option value="update">Update</option>
-          <option value="fix">Fix</option>
-          <option value="announcement">Announcement</option>
-        </select>
-
-        <button type="submit">Publish Post</button>
-      </form>
-      <p id="result"></p>
-    </div>
-
-    <div class="card log-card">
-      <h2>Published Posts</h2>
-      <div class="post-log" id="postLog">
-        <p>Loading posts...</p>
-      </div>
-    </div>
+    <h1>See What’s New Instantly</h1>
+    <p>This demo automatically opens your Beamer in-app widget and lets users check for updates at any time. Try it below or wait a moment for Beamer to open automatically.</p>
+    <button class="beamerTrigger">Check for Updates</button>
   </main>
 
-  <button class="refresh-btn" onclick="loadPosts()">⟳</button>
-  <div id="toast">Post published successfully!</div>
+  <footer>
+    © 2025 Submittble • Built for testing in-app updates and banners
+  </footer>
 
+  <!-- Beamer Embed Configuration -->
   <script>
-    async function showToast(message, color="#28a745") {
-      const toast = document.getElementById('toast');
-      toast.style.background = color;
-      toast.textContent = message;
-      toast.style.display = "block";
-      setTimeout(() => (toast.style.display = "none"), 3000);
-    }
-
-    async function loadPosts() {
-      const log = document.getElementById('postLog');
-      log.innerHTML = '<p>Loading posts...</p>';
-
-      try {
-        const res = await fetch('http://localhost:5000/get-posts');
-        const posts = await res.json();
-
-        if (!posts.length) {
-          log.innerHTML = '<p>No posts found.</p>';
-          return;
-        }
-
-        log.innerHTML = '';
-        posts.forEach(post => {
-          const div = document.createElement('div');
-          div.className = 'post-item';
-          div.innerHTML = `
-            <h4>${post.title}</h4>
-            <div class="post-meta">${new Date(post.created_at).toLocaleString()} | ${post.category || 'Uncategorized'}</div>
-            <div class="post-content">${post.content}</div>
-          `;
-          div.addEventListener('click', () => div.classList.toggle('active'));
-          log.appendChild(div);
-        });
-      } catch (err) {
-        log.innerHTML = '<p style="color:red;">Failed to load posts.</p>';
-      }
-    }
-
-    document.getElementById("postForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const title = document.getElementById("title").value;
-      const content = document.getElementById("content").value;
-      const category = document.getElementById("category").value;
-
-      const result = document.getElementById("result");
-      result.textContent = "Publishing...";
-
-      try {
-        const response = await fetch("http://localhost:5000/create-post", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, content, category })
-        });
-
-        const data = await response.json();
-        if (data.status === "success") {
-          result.textContent = "";
-          showToast("Post published successfully!");
-          document.getElementById("postForm").reset();
-          loadPosts();
-        } else {
-          showToast("Failed to publish post.", "#dc3545");
-        }
-      } catch {
-        showToast("Error publishing post.", "#dc3545");
-      }
-    });
-
-    loadPosts();
+    var beamer_config = {
+      product_id: 'sgmCuSQC78643'  // ← Replace with your real Beamer product ID
+    };
   </script>
+  <script src="https://app.getbeamer.com/js/beamer-embed.js"></script>
+
+  <!-- Auto-Open Logic -->
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (typeof Beamer !== 'undefined') {
+          Beamer.show();
+        } else {
+          console.warn('Beamer not loaded.');
+        }
+      }, 2000);
+    });
+  </script>
+
 </body>
 </html>
+
